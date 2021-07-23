@@ -17,7 +17,7 @@
     "start": "node index.js",
     "dev": "pm2 start index.js -i 4 --watch && pm2 logs",
     "test2": "jest --testEnvironment=node --watchAll --verbose --runInBand",
-    "test": "jest --testEnvironment=node --verbose --forceExit --maxWorkers=1 && npm run jsdoctest",
+    "test": "jest --testEnvironment=node --verbose --forceExit --maxWorkers=1",
     "testLib2": "mocha --require jsdoctest lib/lib.js",
     "testLib3": "mocha `find lib -name \"*.js\"`",
     "testLib": "mocha lib/lib.js"
