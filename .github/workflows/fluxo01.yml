@@ -1,0 +1,107 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - "**"             # Push in all branchs 
+  pull_request:
+    branches: [ main, develop ]
+
+jobs: 
+  backend:
+    runs-on: ubuntu-latest
+    
+    env:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: install Node.js 
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+              
+      - name: Intall deps, build and test          
+        run: yarn 
+        working-directory: ./
+
+      - run: yarn test
+        working-directory: ./src
+
+      - run: yarn test --coverage
+        working-directory: ./src
+
+      # - name: test Shell
+      #   run: mv ./backend/coverage ./
+      #   shell: bash
+
+      # - name: test Shell ok?
+      #   run: ls -la
+      #   shell: bash
+
+      # - name: test Shell ok?
+      #   run: cat coverage/lcov.info
+      #   shell: bash
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./backend/coverage/lcov.info
+
+      # c3igODi9BUAtirZflACYsO5RCI6dXcMbHDJ9h
+      # - uses: actions/checkout@v2
+      # - uses: everlytic/branch-merge@1.1.0
+      #   with:
+      #     github_token: ${{ github.token }}
+      #     source_ref: ${{ github.ref }}
+      #     target_branch: 'develop'
+      #     commit_message_template: '[CI CD - Automated] Merged --"{source_ref}"-- into target {target_branch}'
+        env: 
+          CI: true
+          # API_PORT: 3001
+          # MONGO_ADDRESS1: mongodb://root:root@127.0.0.1:12345
+          # MONGO_ADDRESS: mongodb+srv://admin:1234@cluster0-9jhwf.mongodb.net/BFF_list?authSource=admin&replicaSet=Cluster0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true
+          # MONGO_PORT: 12345
+          # MONGO_ROOT_USERNAME: root
+          # MONGO_ROOT_PASSWORD: root
+
+  # merge-branch:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: everlytic/branch-merge@1.1.0
+  #       with:
+  #         github_token: ${{ github.token }}
+  #         source_ref: ${{ github.ref }}
+  #         target_branch: 'develop'
+  #         commit_message_template: '[CI CD - Automated] Merged --"{source_ref}"-- into target {target_branch}'
+  
+  
+  # docker:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: My first step
+  #     uses: docker://node:13.12.0-alpine
+  #   # - uses: actions/checkout@v2
+  #   - name: install Node.js 
+  #     uses: actions/setup-node@v1
+  #     with:
+  #       node-version: 12.x
+  #       # name: my-artifact-for-30-days
+  #       # path: artifact/path
+  #       # expiration: 30d # '30days' or '30 days' would also work
+  #   - run: yarn
+  #     working-directory: ./frontend
+  #   - run: yarn test
+  #     working-directory: ./frontend
+  #   - run: yarn test --coverage
+  #     working-directory: ./frontend
+  #     env: 
+  #       CI: true
+    
