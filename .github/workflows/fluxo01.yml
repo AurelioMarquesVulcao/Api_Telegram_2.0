@@ -48,11 +48,11 @@ jobs:
       #   run: cat coverage/lcov.info
       #   shell: bash
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./backend/coverage/lcov.info
+      # - name: Coveralls
+      #   uses: coverallsapp/github-action@master
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     path-to-lcov: ./backend/coverage/lcov.info
 
       # c3igODi9BUAtirZflACYsO5RCI6dXcMbHDJ9h
       # - uses: actions/checkout@v2
