@@ -1,5 +1,6 @@
 const sleep = require("await-sleep");
 const shell = require("shelljs");
+const {messagesTelegram} = require('../model/schemas/mongo');
 
 const { AurelioBot } = require("../lib/bot");
 
@@ -19,6 +20,11 @@ class Listening {
     while (true) {
       this.getMessages();
       console.log(await this.getMessages());
+      // await new messagesTelegram({
+      //   message: this.getMessages()[0]
+      // }).save()
+      messagesTelegram.
+      console.log(new Date());
       await sleep(this.timeUpdate);
     }
   }
