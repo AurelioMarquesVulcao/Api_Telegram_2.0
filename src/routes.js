@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 
+
 // const {CosultBasic} = require('./crud/index');
 
 // routes.get("/", function (req, res) {
@@ -9,6 +10,7 @@ const routes = express.Router();
 // routes.post("/", function (req, res) {
 //   return res.send({"message": "Você esta no APP BFF List da Zoeira"});
 // });
+
 
 
 // routes.get("/base", CosultBasic.get);

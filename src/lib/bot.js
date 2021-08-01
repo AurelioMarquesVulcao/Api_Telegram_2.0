@@ -7,6 +7,7 @@ class AurelioBot {
     
     this.key = enums.Telegram.key;
     this.baseUrl = enums.Telegram.baseUrl;
+    console.log(enums)
   }
   /**
    * Metodo de busca de mensagens na API do Telegram.
@@ -14,11 +15,12 @@ class AurelioBot {
   async getMessages(lastId) {
     try{
     const url = `${this.baseUrl}/bot${this.key}/getUpdates?timeout=50&offset=${lastId}`;
+    // console.log(url)
     let getMessages = await Robo.request({
         url: url,
         method: "GET",
     })
-    console.log(getMessages.result);
+    // console.log(getMessages.result);
     return getMessages.result;
   }catch(e){
     console.log(e);
@@ -30,5 +32,5 @@ class AurelioBot {
   async postComands() {}
 }
 
-module.exports.ImpactaBot = ImpactaBot;
+module.exports.AurelioBot = AurelioBot;
 
