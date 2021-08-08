@@ -1,6 +1,6 @@
 const sleep = require("await-sleep");
-const shell = require("shelljs");
-const {messagesTelegram} = require('../model/schemas/mongo');
+// const shell = require("shelljs");
+const { messagesTelegram } = require("../model/schemas/mongo");
 
 const { AurelioBot } = require("../lib/bot");
 
@@ -18,14 +18,30 @@ class Listening {
    */
   async job() {
     while (true) {
-      this.getMessages();
-      console.log(await this.getMessages());
-      // await new messagesTelegram({
-      //   message: this.getMessages()[0]
-      // }).save()
-      messagesTelegram.
+      const messages = await this.getMessages();
+      console.log(messages);
+      console.log(messages[0]);
+
+
+
       console.log(new Date());
       await sleep(this.timeUpdate);
+    }
+  }
+
+  /**
+   * Recebe um Json da mensagem
+   * @param {Object} message
+   */
+  async saveMessage(message) {
+    try {
+      // colocar teste para validar se pode salvar a mensagem
+      await new messagesTelegram({
+        message: message,
+      }).save();
+      console.log("Mensagem salva com sucesso");
+    } catch (e) {
+      console.log(e);
     }
   }
 }
