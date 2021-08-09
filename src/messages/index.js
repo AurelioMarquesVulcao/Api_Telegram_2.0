@@ -8,11 +8,33 @@ class Listening {
   constructor() {
     this.messageHelp = "";
     this.telegram = new AurelioBot();
-    this.timeUpdate = 3000;
+    this.timeUpdate = 9999000;
   }
   async getMessages() {
     return await this.telegram.getMessages("112638177");
   }
+
+  async postMessages(rec, res) {
+    try {
+      console.log(rec.body);
+      const telegram = new AurelioBot();
+      
+      res.send(rec.body);
+      console.log(rec.body.text, rec.body.chat_id);
+      const sendTelegram = await telegram.sendMessages(
+        rec.body
+        // rec.body.text,
+        // rec.body.chat_id
+      );
+      console.log(sendTelegram);
+      
+      // salvar as mensagens no banco de dados apartir daqui.
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   /**
    * job de updates
    */
@@ -21,9 +43,6 @@ class Listening {
       const messages = await this.getMessages();
       console.log(messages);
       console.log(messages[0]);
-
-
-
       console.log(new Date());
       await sleep(this.timeUpdate);
     }

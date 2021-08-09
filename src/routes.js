@@ -1,21 +1,23 @@
 const express = require("express");
 const routes = express.Router();
 
+const { Listening } = require("./messages");
+
+const telegram = new Listening()
+
 
 // const {CosultBasic} = require('./crud/index');
 
-// routes.get("/", function (req, res) {
-//   return res.send({"message": "Você esta no APP BFF List da Zoeira"});
-// });
+routes.get("/", function (req, res) {
+  return res.send({ message: "Você esta no APP " });
+});
 // routes.post("/", function (req, res) {
-//   return res.send({"message": "Você esta no APP BFF List da Zoeira"});
+//   return res.send({"message": "Você esta no APP "});
 // });
-
-
 
 // routes.get("/base", CosultBasic.get);
 
-// routes.post("/base", CosultBasic.post);
+routes.post("/post", telegram.postMessages);
 
 // routes.put("/base", CosultBasic.put);
 
@@ -28,7 +30,5 @@ const routes = express.Router();
 // routes.delete("/delete", UpdateCoin.delete);
 
 // routes.get("/cpu", CPU.cpuStatus);
-
-
 
 module.exports = routes;

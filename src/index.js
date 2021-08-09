@@ -1,9 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const {Listening} = require('./messages');
 
-
+const { Listening } = require("./messages");
 const { DataProduct } = require("./model/schemas/mongo");
 
 const { enums } = require("./config/enums");
@@ -19,12 +18,12 @@ class App {
     this.express.listen(enums.ApiPort, () =>
       console.log(`Sua API REST está funcionando na porta ${enums.ApiPort} `)
     );
-    this.bot()
+    this.bot();
   }
 
   database() {
     try {
-      console.log(enums.Mongo.connString)
+      console.log(enums.Mongo.connString);
       mongoose.connect(enums.Mongo.connString, {
         useCreateIndex: true,
         useNewUrlParser: true,
@@ -32,8 +31,8 @@ class App {
       });
       console.log("Conectado ao mongo");
       new DataProduct({
-        creatDate: new Date()
-      }).save()
+        creatDate: new Date(),
+      }).save();
       // let teste =DataProduct.findOne({})
       // console.log(teste);
     } catch (e) {
@@ -50,8 +49,8 @@ class App {
     this.express.use(require("./routes"));
   }
 
-  bot(){
-    new Listening().job()
+  bot() {
+    new Listening().job();
   }
 }
 module.exports = new App().express;
