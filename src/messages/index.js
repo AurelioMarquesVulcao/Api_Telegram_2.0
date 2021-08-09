@@ -1,6 +1,6 @@
 const sleep = require("await-sleep");
 // const shell = require("shelljs");
-const { messagesTelegram } = require("../model/schemas/mongo");
+// const { messagesTelegram } = require("../model/schemas/mongo");
 const { save } = require("../util/dbMongo");
 const { AurelioBot } = require("../lib/bot");
 
