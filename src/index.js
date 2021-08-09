@@ -30,9 +30,9 @@ class App {
         useUnifiedTopology: true,
       });
       console.log("Conectado ao mongo");
-      new DataProduct({
-        creatDate: new Date(),
-      }).save();
+      // new DataProduct({
+      //   creatDate: new Date(),
+      // }).save();
       // let teste =DataProduct.findOne({})
       // console.log(teste);
     } catch (e) {
