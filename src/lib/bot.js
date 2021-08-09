@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { enums } = require("../config/enums");
-const { Robo } = require("./Robo");
+const { Robo } = require("./robo");
 
 class AurelioBot {
   constructor() {
